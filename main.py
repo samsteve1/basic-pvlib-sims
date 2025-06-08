@@ -20,6 +20,8 @@ system = PVSystem(
     module_parameters=module,
     inverter_parameters=inverter,
     temperature_model_parameters=temperature_model_parameters, 
+    modules_per_string=1,
+    strings_per_inverter=1
     )
 
 modelChain = ModelChain(system, location, name="Tucson")
@@ -50,3 +52,12 @@ plt.xlabel('Time')
 plt.ylabel('Power (W)')
 plt.savefig('dc_power_output.png')
 plt.close()
+
+max_module_power = module.Impo * module.Vmpo * 1 * 1 # modules_per_string * strings_per_inverter
+inverter_capacity = inverter.Paco
+inverter_capacity_dc = inverter.Pdco
+
+print(f"Max Module Power: {max_module_power} W")
+print(f"Inverter AC Capacity: {inverter_capacity} W")
+print(f"Inverter DC Capacity: {inverter_capacity_dc} W")
+print(f"AC Power Output Stats:\n{modelChain.results.ac.describe()}")
