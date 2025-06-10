@@ -84,7 +84,7 @@ poa_data_2020 = pd.read_csv("poa_data_2020.csv", index_col=0)
 poa_data_2020.index = pd.to_datetime(poa_data_2020.index)
 
 modelChain.run_model_from_poa(poa_data_2020)
-modelChain.results.ac.plot()
+modelChain.results.ac.resample("M").sum().plot()
 plt.title('AC Power Output from POA Data')
 plt.xlabel('Time')
 plt.ylabel('Power (W)')
