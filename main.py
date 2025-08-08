@@ -8,8 +8,10 @@ from pvlib.pvsystem import PVSystem
 
 location = Location(latitude=32.2, longitude=-111, tz='America/Detroit', altitude=700, name='Tucson')
 sandia_modules = pvlib.pvsystem.retrieve_sam('SandiaMod')
+cec_modules = pvlib.pvsystem.retrieve_sam('CECMod')
 cec_inverters = pvlib.pvsystem.retrieve_sam('CECInverter')
-
+sandia_modules.to_csv('sandia_modules.csv')
+cec_modules.to_csv('cec_modules.csv')
 module = sandia_modules['Canadian_Solar_CS5P_220M___2009_']
 inverter = cec_inverters['ABB__MICRO_0_25_I_OUTD_US_208__208V_']
 temperature_model_parameters = pvlib.temperature.TEMPERATURE_MODEL_PARAMETERS['sapm']['open_rack_glass_glass']
